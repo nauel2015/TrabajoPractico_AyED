@@ -1,19 +1,18 @@
 #include <iostream>
-#include <stdlib.h>
-#include <string.h>
 
 using namespace std;
 
 struct Sucursal {
     int codigoSucursal;
-    string nombreSucursal;
+    char nombreSucursal[30];
 };
 
 struct Vendedor {
     int codigo;
-    string nombre;
+    char nombre[30];
     Sucursal sucursal;
 };
+
 
 
 void insertarSucursal(Sucursal sucursales[], int &len, Sucursal sucursal, int pos);
@@ -51,21 +50,6 @@ int main()
         cout << "No se pudo crear el archivo" << endl;
     }
 
-    // Imprimo datos traidos de archvo
-    archivo = fopen("vendedores.dat", "rb");
-    if(archivo != NULL) {
-        Vendedor vendedor;
-        cout << "Vendedores registrados: " << endl;
-        while(fread(&vendedor, sizeof(Vendedor), 1, archivo)) {
-            cout << "Codigo: " << vendedor.codigo
-                 << ", Nombre: " << vendedor.nombre
-                 << ", Sucursal: " << vendedor.sucursal.nombreSucursal << endl;
-        }
-        fclose(archivo);
-    } else {
-        cout << "No se pudo abrir el archivo 'vendedores.dat'." << endl;
-    }
-
     return 0;
 }
 
@@ -76,9 +60,10 @@ Sucursal ingresarSucursal() {
     cin >> sucursal.codigoSucursal;
     cout << "Ingrese el nombre de la sucursal: ";
     cin.ignore();
-    getline(cin, sucursal.nombreSucursal);
+    cin.getline(sucursal.nombreSucursal, 30);
     return sucursal;
 }
+
 
 void insertarSucursal(Sucursal sucursales[], int &len, Sucursal sucursal, int pos) {
     for (int i = len; i > pos; i--) {
@@ -127,7 +112,7 @@ Vendedor ingresarVendedor(Sucursal sucursales[], int lenSucursales, Vendedor ven
     int codigoSucursal;
     int pos = -1;
     while (pos == -1) {
-        cout << "Ingrese el codigo de la sucursal del vendedor:" << endl;
+        cout << "Ingrese el codigo de la sucursal del vendedor:";
         cin >> codigoSucursal;
         pos = busquedaBinaria(sucursales, lenSucursales, codigoSucursal);
         if (pos == -1) {
@@ -149,7 +134,7 @@ Vendedor ingresarVendedor(Sucursal sucursales[], int lenSucursales, Vendedor ven
 
     cout << "Ingrese el nombre del vendedor: ";
     cin.ignore();
-    getline(cin, vendedor.nombre);
+    cin.getline(vendedor.nombre, 30);
 
     return vendedor;
 }
