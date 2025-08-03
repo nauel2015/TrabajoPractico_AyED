@@ -1,4 +1,6 @@
+
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -27,16 +29,17 @@ void guardarVentaEnArchivo(Venta venta);
 int main() {
     int opcion;
     do {
-        cout << "----- REGISTRO DE VENTAS -----" << endl;
-        cout << "1. Cargar nueva venta" << endl;
-        cout << "2. Salir" << endl;
-        cout << "Opcion: ";
+        cout << "\n\t----- REGISTRO DE VENTAS -----" << endl;
+        cout << "\nOpcion 1: Cargar nueva venta." << endl;
+        cout << "Opcion 2: Salir." << endl;
+        cout << "\nMarque su opcion: ";
         cin >> opcion;
 
         switch(opcion) {
             case 1: {
+                system("CLS");
                 Venta nuevaVenta;
-                cout << "Ingrese fecha (AAAAMMDD): ";
+                cout << "\nIngrese fecha de venta (AAAAMMDD): ";
                 cin >> nuevaVenta.fecha;
 
                 if (!puedeAgregarVenta(nuevaVenta.fecha)) {
