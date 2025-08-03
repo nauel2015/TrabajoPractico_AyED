@@ -88,9 +88,9 @@ void mejorVendedor()
 
     fclose(archivo);
 
-    FILE* archivo = fopen("ventas_diarias.dat", "rb");
+    FILE* archivoVentas = fopen("ventas_diarias.dat", "rb");
     
-    if(archivo==NULL)
+    if(archivoVentas==NULL)
     {
         cout << "\n\tError al abrir el archivo de ventas_diarias.dat" << endl;
 
@@ -101,7 +101,7 @@ void mejorVendedor()
 
     Venta ventas;
     int montosVendedores [100] = {0};
-    while(fread(&ventas, sizeof(Venta), 1, archivo)==1)
+    while(fread(&ventas, sizeof(Venta), 1, archivoVentas)==1)
     {
         for(int i=0; i<cantVendedores; i++)
         {
@@ -112,7 +112,7 @@ void mejorVendedor()
         }
     }
 
-    fclose(archivo);
+    fclose(archivoVentas);
 
     int posMejorVendedor=0;
     for(int i=1; i<cantVendedores; i++)
@@ -180,7 +180,12 @@ void mejorSucursal()
             if(ventas.codigoVendedor==vendedores[i].codigo)
             {
                 int codigoSucursal = vendedores[i].sucursal.codigoSucursal;
-                montosPorSucursal[codigoSucursal] += ventas.monto;
+                if (codigoSucursal >= 0 && codigoSucursal < cantSucursales)
+                {
+                    montosPorSucursal[codigoSucursal] += ventas.monto;
+                }
+
+                break;
             }
         }
     }
