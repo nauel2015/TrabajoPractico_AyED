@@ -1,4 +1,3 @@
-
 // Comision: K1153.
 // Profesor: Federico maidan.
 // Correo: fedemaidan@frba.utn.edu.ar
@@ -37,9 +36,6 @@ struct ProductoContador
     int codigoProducto;
     int cantidad;
 };
-
-const int MAX_PRODUCTOS = 100;
-
 
 // Declaracion de las funciones.
 void mejorVendedor();
@@ -226,7 +222,7 @@ void rankingProductosMasVendidos()
         return;
     }
     
-    ProductoContador productos[MAX_PRODUCTOS];
+    ProductoContador productos[100];
     int lenProductos = 0;
     
     Venta venta;
@@ -245,7 +241,7 @@ void rankingProductosMasVendidos()
         if ( pos != -1)
         {
           productos[pos].cantidad++;
-        } else if (lenProductos < MAX_PRODUCTOS)
+        } else if (lenProductos < 100)
                 {
                     productos[lenProductos].codigoProducto = venta.codigoProducto;
                     productos[lenProductos].cantidad = 1;
