@@ -24,7 +24,7 @@ bool codigoVendedorExiste(Vendedor vendedores[], int len, int codigo);
 Vendedor ingresarVendedor(Sucursal sucursales[], int lenSucursales, Vendedor vendedores[], int lenVendedores);
 void insertarVendedor(Vendedor vendedores[], int &len, Vendedor vendedor, int pos);
 void insertarVendedorOrdenado(Vendedor vendedores[], int &len, Vendedor vendedor);
-Sucursal ingresarSucursal();
+Sucursal ingresarSucursal(int index);
 
 int main()
 {
@@ -32,7 +32,7 @@ int main()
     Sucursal sucursales[cantidadSucursales];
     int lenSucursales = 0;
     for(int i = 0; i < cantidadSucursales; i++) {
-        const Sucursal sucursal = ingresarSucursal();
+        const Sucursal sucursal = ingresarSucursal(i);
         insertarSucursalOrdenado(sucursales, lenSucursales, sucursal);
     }
 
@@ -56,11 +56,11 @@ int main()
 }
 
 
-Sucursal ingresarSucursal() {
+Sucursal ingresarSucursal(int index) {
     Sucursal sucursal;
-    cout << "Ingrese el codigo de la sucursal: ";
+    cout << "Ingrese el codigo de la sucursal " << index + 1 << ": ";
     cin >> sucursal.codigoSucursal;
-    cout << "Ingrese el nombre de la sucursal: ";
+    cout << "Ingrese el nombre de la sucursal "<< index + 1 <<": ";
     cin.ignore();
     cin.getline(sucursal.nombreSucursal, 30);
     return sucursal;
